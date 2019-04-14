@@ -1,30 +1,59 @@
 import random
-import collections
+import string
 
-length = 4
-guesses = 12
 
-pattern = [random.choice('0123456789') for _ in range(length)]
-print(*pattern)
+class Game():
+    """One game with multiple rounds."""
 
-counted = collections.Counter(pattern)
+    def __init__(self, numOfDraws, numOfDigits):
+        self.totalDraws = numOfDraws
+        self.remainingDraws = numOfDraws
 
-def running():
-    guess = input('?:')
-    guess_count = collections.Counter(guess)
-    close = sum(min(counted[k], guess_count[k]) for k in counted)
-    exact = sum(a==b for a,b in zip(pattern,guess))
-    close -= exact
-    print('Exact: {}. Close: {}.'.format(exact,close))
-    return exact != length
+        self.rounds = []
 
-for attempt in range (guesses):
-    if not running():
-        print('Done!')
-        break
-    else:
-        print('Guesses remaining:', guesses - 1 - attempt)
+    def getCurrentRound(self):
+        if len(self.rounds) != 0 and self.rounds[-1].running:
+            return self.rounds[-1]
+        else:
+            # return new round
 
-else:
-    print('Game over. The code was {}.'.format(''.join(pattern)))
+    def _newRound(self):
+        # create new Round and add to array
 
+    def getTotalScore(self):
+        # return sum of round scores
+
+    def getRemainingDraws(self):
+        # return number of remaining draws (5 draws per guess)
+
+    def getAllDraws(self):
+        # return all draws (guesses + results) for each round
+
+    def getRoundNumber(self):
+        return len(self.rounds)
+
+    def submitGuesses(self):
+        # direct one draw (= 5 guesses) to current round and return results
+
+class Round():
+        """One round against one enemy (=secret)"""
+    def __init__(self, numOfDigits):
+        self.secret = createSecret(numOfDigits)
+        self.draws = []
+        self.score = 0
+        self.draws = []
+
+    def getScore(self):
+        return self.score
+
+    def submitGuesses(self, guesses):
+        results = []
+        for guess in guesses:
+            results.append(self._calcResult(guess))
+        return results
+
+    def _calcResult(self, guess):
+        # Calculate result for one guess
+
+    def _createSecret(self, numOfDigits):
+        return "".join([random.choice(string.digits) for i in xrange(32)])
