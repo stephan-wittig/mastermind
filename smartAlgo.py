@@ -4,19 +4,30 @@ import string
 class SmartAlgo():
     def __init__(self, numOfDigits):
         self.numOfDigits = numOfDigits
-        self.drawNumber = 0
-        self.distribution = {} # for each digit : 0
+        self.lastScore = []
+        self.lastGuesses = []
 
     def nextDraw(self):
-        #ToDo: Zu  switch ändern
-        if self.drawNumber > 1:
-            #Send geneticly generated string
-        elif self.drawNumber = 1:
-            #Send string of 5s, 6s ... 9s only
-        elif self.drawNumber = 0:
-            #Send string of 0s, 1s ... 4s only
+        nextGuesses = []
+        if len(self.lastGuesses) > 0:
+            for _ in range(5):
+                # Create 5 new guesses
+                nextGuess = ""
+                for j in range  (self.numOfDigits):
+                    # Choose x digits (according to game rules)
+                    choice =  random.choices(range(len(self.lastScore)), self.lastScore)[0]
+                    nextGuess += self.lastGuesses[choice][j]
+                nextGuesses.append(nextGuess)
+            self.lastGuesses = nextGuesses
+            return nextGuesses
+            
+        else:
+            for _ in range(5):
+                # Randomly generate string in first draw
+                nextGuesses.append("".join([random.choice(string.digits) for j in range(self.numOfDigits)]))
+            self.lastGuesses = nextGuesses
+            return nextGuesses
 
     def results(self, results):
-        
-        
-        self.drawNumber ++
+        self.lastScore = results
+
