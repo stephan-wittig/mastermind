@@ -1,29 +1,29 @@
 import game
-import smartAlgo
+import geneticAlgorithm
 import statistics
 
 numOfDigits = 4
 numOfDraws = 60
-numOfGames = 1000
+numOfGames = 2000
 
 scores = []
 roundsWon = []
 
 print("The secrets are " + str(numOfDigits) + " digits long.")
-print("Each game runs for " + str(numOfDraws) + " draws.")
-print("Let the games begin")
-for i in range(numOfGames):
-    g = game.Game(numOfDraws, numOfDigits)
-    a = smartAlgo.SmartAlgo(numOfDigits)
+print("Simulation starts")
+print("Quotient; Rounds won; Score; Score/Guess")
+for q in [1]:
+    for i in range(numOfGames):
+        g = game.Game(numOfDraws, numOfDigits)
+        a = geneticAlgorithm.SmartAlgo(numOfDigits, q)
 
-    for j in range(numOfDraws):
-        nextDraw = a.nextDraw()
-        a.results(g.submitGuesses(nextDraw))
+        for j in range(numOfDraws):
+            nextDraw = a.nextDraw()
+            a.results(g.submitGuesses(nextDraw))
 
-    roundsWon.append(g.getRoundNumber())
-    scores.append(g.getTotalScore())
-    print("Finished game " + str(i))
+        roundsWon.append(g.getRoundNumber())
+        scores.append(g.getTotalScore())
 
-print("Rounds won on average: " + str(statistics.mean(roundsWon)))
-print("Average game score: " + str(statistics.mean(scores)))
-print("Average score per guess: " + str(statistics.mean(scores) / (numOfDraws * 5)))
+    print(str(q) + "; " + str(statistics.mean(roundsWon)) + "; " + str(statistics.mean(scores)) + "; " + str(statistics.mean(scores) / (numOfDraws * 5)))
+
+print("Finished simulation")
