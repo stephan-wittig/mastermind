@@ -1,29 +1,50 @@
 import game
-import geneticAlgorithm
+import smartAlgorithms
 import statistics
+import csv
+import progressbar
 
 numOfDigits = 4
 numOfDraws = 60
-numOfGames = 2000
+numOfGames = 10000
+# Add your algorithm here to test it
+algorithms = [
+    smartAlgorithms.genetic,
+    smartAlgorithms.totallyRandom
+]
 
 scores = []
 roundsWon = []
 
 print("The secrets are " + str(numOfDigits) + " digits long.")
-print("Simulation starts")
-print("Quotient; Rounds won; Score; Score/Guess")
-for q in [1]:
-    for i in range(numOfGames):
-        g = game.Game(numOfDraws, numOfDigits)
-        a = geneticAlgorithm.SmartAlgo(numOfDigits, q)
+print(str(len(algorithms)) + " algorithms will be tested.")
+print("Simulation starts.")
 
-        for j in range(numOfDraws):
-            nextDraw = a.nextDraw()
-            a.results(g.submitGuesses(nextDraw))
+with open("results.csv", mode="a", newline="") as csv_file:
+    fieldnames = ["Algorithm", "Sample_size", "Number of Digits", "Rounds_won", "Score", "Score/Guess"]
+    writer = csv.DictWriter(csv_file, fieldnames = fieldnames)
+    for algo in algorithms:
+        for i in range(numOfGames):
+            # Initiate game
+            g = game.Game(numOfDraws, numOfDigits)
+            # Initiate algorithm
+            a = algo(numOfDigits)
 
-        roundsWon.append(g.getRoundNumber())
-        scores.append(g.getTotalScore())
+            for j in range(numOfDraws):
+                nextDraw = a.nextDraw()
+                a.results(g.submitGuesses(nextDraw))
 
-    print(str(q) + "; " + str(statistics.mean(roundsWon)) + "; " + str(statistics.mean(scores)) + "; " + str(statistics.mean(scores) / (numOfDraws * 5)))
+            roundsWon.append(g.getRoundNumber())
+            scores.append(g.getTotalScore())
 
+        print("Finished testing", type(a).__name__)
+        writer.writerow({ 
+            "Algorithm": type(a).__name__, 
+            "Sample_size": numOfGames, 
+            "Number of Digits": numOfDigits, 
+            "Rounds_won": str(sum(roundsWon)), 
+            "Score": str(sum(scores)), 
+            "Score/Guess": str(statistics.mean(scores) / (numOfDraws * 5))
+        })
+csv_file.close()
 print("Finished simulation")

@@ -1,8 +1,8 @@
 import random
 import string
 
-class SmartAlgo():
-    def __init__(self, numOfDigits, mQuotient):
+class genetic():
+    def __init__(self, numOfDigits):
         self.numOfDigits = numOfDigits
         self.lastScore = []
         self.lastGuesses = []
@@ -16,7 +16,7 @@ class SmartAlgo():
                 nextGuess = ""
                 for j in range  (self.numOfDigits):
                     # Choose x digits (according to game rules)
-                    #Combine last guesses
+                    # Combine last guesses
                     choice =  random.choices(range(len(self.lastScore)), self.lastScore)[0]
                     nextGuess += self.lastGuesses[choice][j]
                 nextGuesses.append(nextGuess)
@@ -33,3 +33,20 @@ class SmartAlgo():
     def results(self, results):
         self.lastScore = results
 
+
+class totallyRandom():
+    def __init__(self, numOfDigits):
+        self.numOfDigits = numOfDigits
+        self.lastScore = []
+        self.lastGuesses = []
+
+    def nextDraw(self):
+        nextGuesses = []
+        for _ in range(5):
+            # Randomly generate string in first draw
+            nextGuesses.append("".join([random.choice(string.digits) for j in range(self.numOfDigits)]))
+        self.lastGuesses = nextGuesses
+        return nextGuesses
+
+    def results(self, results):
+        pass
