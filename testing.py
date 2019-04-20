@@ -6,7 +6,7 @@ import progressbar
 
 numOfDigits = 4
 numOfDraws = 60
-numOfGames = 10000
+numOfGames = 100
 # Add your algorithm here to test it
 algorithms = [
     smartAlgorithms.genetic,
@@ -16,8 +16,8 @@ algorithms = [
 scores = []
 roundsWon = []
 
-print("The secrets are " + str(numOfDigits) + " digits long.")
-print(str(len(algorithms)) + " algorithms will be tested.")
+print("The secrets are", str(numOfDigits), "digits long.")
+print(str(len(algorithms)),"algorithms will be tested.")
 print("Simulation starts.")
 
 with open("results.csv", mode="a", newline="") as csv_file:
@@ -37,7 +37,7 @@ with open("results.csv", mode="a", newline="") as csv_file:
             roundsWon.append(g.getRoundNumber())
             scores.append(g.getTotalScore())
 
-        print("Finished testing", type(a).__name__)
+        print("Finished testing", type(a).__name__ +".")
         writer.writerow({ 
             "Algorithm": type(a).__name__, 
             "Sample_size": numOfGames, 
