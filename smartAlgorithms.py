@@ -17,7 +17,7 @@ class genetic():
                 for j in range  (self.numOfDigits):
                     # Choose x digits (according to game rules)
                     # Combine last guesses
-                    choice =  random.choices(range(len(self.lastScore)), self.lastScore)[0]
+                    choice = random.choices(range(len(self.lastScore)), self.lastScore)[0]
                     nextGuess += self.lastGuesses[choice][j]
                 nextGuesses.append(nextGuess)
             self.lastGuesses = nextGuesses

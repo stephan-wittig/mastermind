@@ -2,7 +2,7 @@ import game
 import smartAlgorithms
 import statistics
 import csv
-import progressbar
+import SecretPoolParty
 
 numOfDigits = 4
 numOfDraws = 60
@@ -10,7 +10,8 @@ numOfGames = 100
 # Add your algorithm here to test it
 algorithms = [
     smartAlgorithms.genetic,
-    smartAlgorithms.totallyRandom
+    smartAlgorithms.totallyRandom,
+    SecretPoolParty.secretPoolEliminator
 ]
 
 scores = []
@@ -30,12 +31,16 @@ with open("results.csv", mode="a", newline="") as csv_file:
             # Initiate algorithm
             a = algo(numOfDigits)
 
+
             for j in range(numOfDraws):
                 nextDraw = a.nextDraw()
                 a.results(g.submitGuesses(nextDraw))
 
             roundsWon.append(g.getRoundNumber())
             scores.append(g.getTotalScore())
+
+            #Debugging
+            print(i)
 
         print("Finished testing", type(a).__name__ +".")
         writer.writerow({ 
