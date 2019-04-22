@@ -1,6 +1,6 @@
 #Mattis Deisen(Github: Skatam)
 
-#Derping around with what appears to be smart but ressource intensive on first thought. Only works with 4 digits atm!
+#Derping around with what appears to be smart but ressource intensive on first thought.
 import collections
 import random
 
@@ -8,26 +8,36 @@ class secretPoolEliminator():
 
     def __init__(self, numOfDigits):
         self.numOfDigits = numOfDigits
-        self.lastScore = []
+        self.lastScores = []
         self.lastGuesses = []
         self.maxScore = numOfDigits * 10
-        #initialize List with all possible secrets
-        self.possibleSecretPool = self.generatePossibleSecrets()
-        print('New Round!')
+        self.possibleSecretPool = self.generatePossibleSecrets(numOfDigits)
+
+    # Is done after every draw and lastScores are taken into account for next code guess determination
+    def results(self, results):
+        self.lastScores = results
+
+    # Generates all possible secrets in a list as strings
+    @staticmethod
+    def generatePossibleSecrets(numofdigits):
+        secrets = []
+        print(10**numofdigits)
+        for i in range (1, 10**numofdigits):
+            secrets.append(str(i).zfill(numofdigits))
+        return secrets
 
 
-    #returns 5 new codes to evaluate
+    # Applies the algorithm to decide on the next 5 guesses which are returned
     def nextDraw(self):
         nextGuesses = []
 
-        #if the correct score was guessed last round, initialize again
-        for score in self.lastScore:
-            if score == self.maxScore:
-                self.__init__(self.numOfDigits)
-                return self.firstGuesses()
-
-        #In first round take default guesses (improve those guesses later)
+        # In first round take default guesses (improve those guesses later)
         if not self.lastGuesses:
+            return self.firstGuesses()
+
+        #If the correct score was guessed last round, initialize again for new code
+        if (self.maxScore in self.lastScores):
+            self.__init__(self.numOfDigits)
             return self.firstGuesses()
 
         #Remove impossible secrets from pool
@@ -37,7 +47,6 @@ class secretPoolEliminator():
         for _ in range(5):
             # Create 5 new guesses
             choice = random.choice(self.possibleSecretPool)
-            choice = self.stringifyIntList(choice)
             nextGuesses.append(choice)
             self.lastGuesses = nextGuesses
         return nextGuesses
@@ -46,7 +55,7 @@ class secretPoolEliminator():
     def removeImpossibleSecrets(self):
 
         #Combines guesses and scores for iteration
-        for guessandscore in zip(self.lastGuesses, self.lastScore):
+        for guessandscore in zip(self.lastGuesses, self.lastScores):
 
             #Goes through every possible remaining secret and checks whether it would have lead to the received score for
             #the guess that was submitted. If not, drop it like its hot.
@@ -70,33 +79,11 @@ class secretPoolEliminator():
 
     #returns guesses for first round
     def firstGuesses(self):
-
         firstGuesses = []
-        firstGuesses.append('0123')
-        firstGuesses.append('1234')
-        firstGuesses.append('5678')
-        firstGuesses.append('9012')
-        firstGuesses.append('3456')
-
+        for each in range(5):
+            firstGuesses.append(str(random.randint(0,10**self.numOfDigits-1)).zfill(self.numOfDigits))
         self.lastGuesses = firstGuesses
         return firstGuesses
 
-    #This should be optimized and generalized. Needs to generate all possible combinations in a list (10^4 for 4 digits to 10^10 for 10 digits)
-    @staticmethod
-    def generatePossibleSecrets():
-        secrets = []
-        for a in range(10):
-            for b in range(10):
-                for c in range(10):
-                    for d in range(10):
-                        secrets.append(str(a)+str(b)+str(c)+str(d))
-        return secrets
 
-    def results(self, results):
-        self.lastScore = results
 
-    #stringifyIntList stringifies IntList to stringList because python datatypes are confusing and this is set up badly...
-    def stringifyIntList(self, intList):
-        stringyThing = [str(i) for i in intList]
-        stringyThing = ("".join(stringyThing))
-        return stringyThing
