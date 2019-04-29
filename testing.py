@@ -1,17 +1,22 @@
 import game
-import smartAlgorithms
 import statistics
 import csv
-import SecretPoolParty
 import time
+
+# Import your algorithms
+from SecretPoolParty import secretPoolEliminator
+from luckBasedApproaches import totallyRandom
+from geneticAlgorithms import genetic
+
 numOfDigits = 4
 numOfDraws = 60
 numOfGames = 1
+
 # Add your algorithm here to test it
 algorithms = [
-    smartAlgorithms.genetic,
-    smartAlgorithms.totallyRandom,
-    SecretPoolParty.secretPoolEliminator
+    genetic,
+    totallyRandom,
+    secretPoolEliminator
 ]
 
 scores = []
@@ -41,7 +46,7 @@ with open("results.csv", mode="a", newline="") as csv_file:
             scores.append(g.getTotalScore())
 
             #Debugging
-            print(i)
+            #print(i)
 
         elapsedtime = (time.time() - start)
 
