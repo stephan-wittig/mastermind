@@ -21,7 +21,7 @@ class secretPoolEliminator():
     @staticmethod
     def generatePossibleSecrets(numofdigits):
         secrets = []
-        print(10**numofdigits)
+        #print(10**numofdigits)
         for i in range (1, 10**numofdigits):
             secrets.append(str(i).zfill(numofdigits))
         return secrets
