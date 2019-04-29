@@ -21,6 +21,7 @@ algorithms = [
 
 scores = []
 roundsWon = []
+runtimes = []
 
 print("The secrets are", str(numOfDigits), "digits long.")
 print(str(len(algorithms)),"algorithms will be tested.")
@@ -30,8 +31,8 @@ with open("results.csv", mode="a", newline="") as csv_file:
     fieldnames = ["Algorithm", "Sample_size", "Number of Digits", "Rounds_won", "Score", "Score/Guess", "Runtime"]
     writer = csv.DictWriter(csv_file, fieldnames = fieldnames)
     for algo in algorithms:
-        start = time.time()
         for i in range(numOfGames):
+            start = time.time()
             # Initiate game
             g = game.Game(numOfDraws, numOfDigits)
             # Initiate algorithm
@@ -44,11 +45,11 @@ with open("results.csv", mode="a", newline="") as csv_file:
 
             roundsWon.append(g.getRoundNumber())
             scores.append(g.getTotalScore())
+            
+            runtimes.append(time.time() - start)
 
             #Debugging
             #print(i)
-
-        elapsedtime = (time.time() - start)
 
         print("Finished testing", type(a).__name__ +".")
         writer.writerow({ 
@@ -58,7 +59,7 @@ with open("results.csv", mode="a", newline="") as csv_file:
             "Rounds_won": str(sum(roundsWon)), 
             "Score": str(sum(scores)), 
             "Score/Guess": str(statistics.mean(scores) / (numOfDraws * 5)),
-            "Runtime": str(elapsedtime)
+            "Runtime": str(statistics.mean(runtimes))
         })
 csv_file.close()
 print("Finished simulation")
