@@ -80,7 +80,7 @@ class secretPoolEliminator():
     #returns guesses for first round
     def firstGuesses(self):
         firstGuesses = []
-        for each in range(5):
+        for _ in range(5):
             firstGuesses.append(str(random.randint(0,10**self.numOfDigits-1)).zfill(self.numOfDigits))
         self.lastGuesses = firstGuesses
         return firstGuesses

@@ -10,7 +10,7 @@ class totallyRandom():
     def nextDraw(self):
         nextGuesses = []
         for _ in range(5):
-            # Randomly generate string in first draw
+            # Randomly generate strings
             nextGuesses.append("".join([random.choice(string.digits) for j in range(self.numOfDigits)]))
         self.lastGuesses = nextGuesses
         return nextGuesses
