@@ -2,6 +2,7 @@ import game
 import statistics
 import csv
 import time
+import progressbar
 
 # Import your algorithms
 from SecretPoolParty import secretPoolEliminator
@@ -10,7 +11,7 @@ from geneticAlgorithms import genetic
 
 numOfDigits = 4
 numOfDraws = 60
-numOfGames = 1
+numOfGames = 5
 
 # Add your algorithm here to test it
 algorithms = [
@@ -31,7 +32,7 @@ with open("results.csv", mode="a", newline="") as csv_file:
     fieldnames = ["Algorithm", "Sample_size", "Number of Digits", "Rounds_won", "Score", "Score/Guess", "Runtime"]
     writer = csv.DictWriter(csv_file, fieldnames = fieldnames)
     for algo in algorithms:
-        for i in range(numOfGames):
+        for i in progressbar.progressbar(range(numOfGames)):
             start = time.time()
             # Initiate game
             g = game.Game(numOfDraws, numOfDigits)
