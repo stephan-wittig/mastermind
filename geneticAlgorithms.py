@@ -6,7 +6,7 @@ class genetic():
         self.numOfDigits = numOfDigits
         self.lastScore = []
         self.lastGuesses = []
-        self.maxScore = numOfDigits * 5 * 10
+        self.maxScore = numOfDigits * 10
 
     def nextDraw(self):
         nextGuesses = []
@@ -32,3 +32,6 @@ class genetic():
 
     def results(self, results):
         self.lastScore = results
+        if max(results) == self.maxScore:
+            self.__init__(self.numOfDigits)
+    

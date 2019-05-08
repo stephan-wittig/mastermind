@@ -8,15 +8,17 @@ import progressbar
 from SecretPoolParty import secretPoolEliminator
 from luckBasedApproaches import totallyRandom
 from geneticAlgorithms import genetic
+from bercowAlgorithms import basicBercow
 
 numOfDigits = 4
 numOfDraws = 60
-numOfGames = 5
+numOfGames = 100
 
 # Add your algorithm here to test it
 algorithms = [
-    genetic,
     totallyRandom,
+    genetic,
+    basicBercow,
     secretPoolEliminator
 ]
 
@@ -31,6 +33,7 @@ print("Simulation starts.")
 with open("results.csv", mode="a", newline="") as csv_file:
     fieldnames = ["Algorithm", "Sample_size", "Number of Digits", "Rounds_won", "Score", "Score/Guess", "Runtime"]
     writer = csv.DictWriter(csv_file, fieldnames = fieldnames)
+    writer.writeheader()
     for algo in algorithms:
         for i in progressbar.progressbar(range(numOfGames)):
             start = time.time()
@@ -57,8 +60,8 @@ with open("results.csv", mode="a", newline="") as csv_file:
             "Algorithm": type(a).__name__, 
             "Sample_size": numOfGames, 
             "Number of Digits": numOfDigits, 
-            "Rounds_won": str(sum(roundsWon)), 
-            "Score": str(sum(scores)), 
+            "Rounds_won": str(statistics.mean(roundsWon)), 
+            "Score": str(statistics.mean(scores)), 
             "Score/Guess": str(statistics.mean(scores) / (numOfDraws * 5)),
             "Runtime": str(statistics.mean(runtimes))
         })
