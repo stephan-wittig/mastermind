@@ -8,18 +8,15 @@ import progressbar
 from SecretPoolParty import secretPoolEliminator
 from luckBasedApproaches import totallyRandom
 from geneticAlgorithms import genetic
-from bercowAlgorithms import basicBercow
+from bercowAlgorithms import basicBercow, bercowPoolParty
 
-numOfDigits = 4
+numOfDigits = 10
 numOfDraws = 60
 numOfGames = 100
 
 # Add your algorithm here to test it
 algorithms = [
-    totallyRandom,
-    genetic,
-    basicBercow,
-    secretPoolEliminator
+    bercowPoolParty
 ]
 
 scores = []

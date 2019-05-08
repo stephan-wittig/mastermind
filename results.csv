@@ -3,3 +3,21 @@ totallyRandom,100,4,0.02,2428.6,8.095333333333333,0.04578845977783203
 genetic,100,4,0.01,3870.3,12.901,0.045724060535430905
 basicBercow,100,4,3.033333333333333,4412.6,14.708666666666668,0.043798431555430097
 secretPoolEliminator,100,4,5.8675,4348.6,14.495333333333335,8.160667833089828
+Algorithm,Sample_size,Number of Digits,Rounds_won,Score,Score/Guess,Runtime
+bercowPoolParty,100,4,9.63,5534.6,18.448666666666668,0.011431159973144532
+Algorithm,Sample_size,Number of Digits,Rounds_won,Score,Score/Guess,Runtime
+bercowPoolParty,100,7,0.17,12339.85,41.13283333333334,0.1065490198135376
+Algorithm,Sample_size,Number of Digits,Rounds_won,Score,Score/Guess,Runtime
+bercowPoolParty,100,7,0.31,12321.8,41.07266666666666,0.3636482882499695
+Algorithm,Sample_size,Number of Digits,Rounds_won,Score,Score/Guess,Runtime
+bercowPoolParty,5,8,0.6,14057,46.85666666666667,7.858681154251099
+Algorithm,Sample_size,Number of Digits,Rounds_won,Score,Score/Guess,Runtime
+Algorithm,Sample_size,Number of Digits,Rounds_won,Score,Score/Guess,Runtime
+Algorithm,Sample_size,Number of Digits,Rounds_won,Score,Score/Guess,Runtime
+Algorithm,Sample_size,Number of Digits,Rounds_won,Score,Score/Guess,Runtime
+Algorithm,Sample_size,Number of Digits,Rounds_won,Score,Score/Guess,Runtime
+Algorithm,Sample_size,Number of Digits,Rounds_won,Score,Score/Guess,Runtime
+Algorithm,Sample_size,Number of Digits,Rounds_won,Score,Score/Guess,Runtime
+bercowPoolParty,1,10,0,17555,58.516666666666666,98.79204893112183
+Algorithm,Sample_size,Number of Digits,Rounds_won,Score,Score/Guess,Runtime
+bercowPoolParty,100,10,0,17318.95,57.72983333333334,0.5576254415512085
