@@ -10,13 +10,15 @@ from luckBasedApproaches import totallyRandom
 from geneticAlgorithms import genetic
 from bercowAlgorithms import basicBercow, bercowPoolParty
 
-numOfDigits = 10
+numOfDigits = 7
 numOfDraws = 60
 numOfGames = 100
 
 # Add your algorithm here to test it
 algorithms = [
-    bercowPoolParty
+    bercowPoolParty,
+    genetic,
+    totallyRandom
 ]
 
 scores = []
